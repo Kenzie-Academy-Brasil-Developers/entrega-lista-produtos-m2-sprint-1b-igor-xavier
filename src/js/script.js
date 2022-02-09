@@ -1,4 +1,16 @@
 const ul = document.querySelector('.containerListaProdutos ul')
+
+const atualizarPreco = document.querySelector('#precoTotal')
+
+const somarValores = (array) =>{
+    showResults = array.reduce((acc, atual)=>{
+        return Number(acc) + Number(atual)
+    }, 0)
+        return showResults
+}
+
+
+
 function montarListaProdutos(listaProdutos) {
     ul.innerHTML = ''
     listaProdutos.forEach((produto) => {
@@ -14,27 +26,34 @@ function montarListaProdutos(listaProdutos) {
         h3.innerText = produto.nome
         p.innerText = produto.preco
         span.innerText = produto.secao
-
+        
 
         li.appendChild(img)
         li.appendChild(h3)
         li.appendChild(p)
         li.appendChild(span)
-
-
         ul.appendChild(li)
-        li.addEventListener('click', addPreco)
+        valores.push(p.innerText)    
+        somarValores(valores)
+        atualizarPreco.innerText = showResults
 
     })
 }
+let valores = []
 function filtrarPorHortifruti() {
     const listaHortifruti = produtos.filter((produto) => {
-        
         return produto.secao === 'Hortifruti'
     });
+    valores = []
     montarListaProdutos(listaHortifruti)
+    
+
+
 }
+
 function montarListaGeral(){
+    valores = []
+
     montarListaProdutos(produtos)
 }
 
@@ -46,6 +65,7 @@ function filtrarPorNome(){
 
         return produto.nome.toLowerCase() === texto
     })
+    valores = []
     montarListaProdutos(filtroNome)
 
 }
@@ -60,14 +80,11 @@ botaoMostrarHortifruti.addEventListener('click', filtrarPorHortifruti)
 botaoMostrarTodos.addEventListener('click', montarListaGeral)
 botaoPesquisar.addEventListener('click', filtrarPorNome)
 
-const atualizarPreco = document.querySelector('#precoTotal')
-let total = 0
-function addPreco (event){
-    
-    let itemSelecionado = event.target.parentElement
-    if (itemSelecionado.tagName === 'LI'){
-        total += Number(itemSelecionado.children[2].innerText)
-        atualizarPreco.innerText = total.toFixed(2)
-    }
 
-}
+
+
+
+
+
+
+
