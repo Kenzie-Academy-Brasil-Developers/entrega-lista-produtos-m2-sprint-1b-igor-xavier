@@ -35,7 +35,7 @@ function montarListaProdutos(listaProdutos) {
         ul.appendChild(li)
         valores.push(p.innerText)    
         somarValores(valores)
-        atualizarPreco.innerText = showResults
+        atualizarPreco.innerText = showResults.toFixed(2)
 
     })
 }
